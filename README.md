@@ -24,8 +24,8 @@
 
 ### Preprocessing
 
-- 1. Without Scaling
-- 2. MinMaxScaling: range 0 - 1
+1. Without Scaling
+2. MinMaxScaling: range 0 - 1
 
 ### Training
 
