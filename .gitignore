@@ -1,10 +1,12 @@
 .DS_Store
 
-*.png
-*.jpeg
-*.jpg
+visualize/all/*
+visualize/corr/*
+visualize/history/*
 
 __pycache__
+
+*.h5
 
 *.pptx
 wip_cnn_lstm

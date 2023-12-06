@@ -84,6 +84,7 @@ def main():
     print(f"Corr Test loss: {loss1}")
 
     predicted1 = model1.predict(testX1)
+    model1.save("model_result/lstm_model_corr_scaled_b{}_e{}_f{}".format(batch_size, epoch, features1), save_format="h5")
 
     post_predicted1 = post_process(predicted1)
 
@@ -103,6 +104,7 @@ def main():
     predicted2 = model2.predict(testX2)
 
     post_predicted2 = post_process(predicted2)
+    model2.save("model_result/lstm_model_all_scaled_b{}_e{}_f{}".format(batch_size, epoch, features2), save_format="h5")
 
     visualize(post_predicted2, testy2, trained_result2, "all", str(epoch), str(batch_size))
     mse2 = mean_squared_error(testy2, post_predicted2)

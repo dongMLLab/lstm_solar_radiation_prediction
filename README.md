@@ -1,5 +1,7 @@
 # Solar Radiation Prediction
 
+- author: donghquinn
+
 ## DataSet
 
 - Climate ASOS data collected by South Korean Meteorological Administration(KMA)
@@ -9,6 +11,7 @@
 
 ### Model
 
+- Input Shape: 48(2 days' data), 12(daily data)
 - Long Short-Term memory(LSTM)
 - time_steps: 48
 - Loss Function: MSE
@@ -36,5 +39,12 @@
     - With all attributes: 0.012, 0.000
     - With correlated attributes: 0.016, 0.127
 
+### Visualized Graphs
+
 - Better results using correlated features with relatively robustic results.
+
+<img src="./corr_sample.png"/>
+
 - All Attributes results following raw graph shapes
+
+<img src="./all_sample.png"/>
