@@ -41,10 +41,14 @@
 
 ### Visualized Graphs
 
-- Better results using correlated features with relatively robustic results.
+- Better results using All features with relatively robustic results.
 
-<img src="./corr_sample.png"/>
+<div>
+    <h1> Predicted Results With Correlated Variables</h1>
+    <img src="./corr_sample.png"/>
+</div>
 
-- All Attributes results following raw graph shapes
-
-<img src="./all_sample.png"/>
+<div>
+    <h1> Predicted Results With All Variables</h1>
+    <img src="./all_sample.png"/>
+</div>
