@@ -1,11 +1,12 @@
 from lstm import initiate_model
 from preprocess import create_sequence
+from keras.callbacks import EarlyStopping
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
 def train_model(model,trainX, trainy, validation_split: int, batch_size: int, epoch: int):
-    trained = model.fit(trainX, trainy, validation_split=validation_split, batch_size=batch_size, epochs=epoch)
+    early_stopping = EarlyStopping(patience=10)
+    trained = model.fit(trainX, trainy, validation_split=validation_split, batch_size=batch_size, epochs=epoch, callbacks = [early_stopping])
 
     return trained
 
@@ -38,7 +39,8 @@ def main():
     features1 = 4
     # All
     features2 = 8
-    epoch = 500
+
+    epoch = 400
     batch_size = 64
     learning_rate = 0.00001
 

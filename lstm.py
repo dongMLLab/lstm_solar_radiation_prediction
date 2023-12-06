@@ -10,7 +10,7 @@ def initiate_model(learning_rate: float, sample_sequences: int, features: int):
     model.add(LSTM(10, activation="relu"))
     model.add(Dense(1))
 
-    model.compile(loss="mse", optimizer=optimizer, )
+    model.compile(loss="mse", optimizer=optimizer, metrics = ['accuracy'])
 
     print(model.summary())
 
