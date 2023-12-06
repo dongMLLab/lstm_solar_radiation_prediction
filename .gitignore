@@ -1,0 +1,10 @@
+.DS_Store
+
+*.png
+*.jpeg
+*.jpg
+
+__pycache__
+
+*.pptx
+wip_cnn_lstm
