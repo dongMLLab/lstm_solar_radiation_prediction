@@ -6,6 +6,8 @@
 
 - Climate ASOS data collected by South Korean Meteorological Administration(KMA)
 - Hourly Data Period: 2017-01-01 00:00:00 ~ 2023-10-18 23:00:00
+- Attributes: date, temperature, rain, total_cloud, humidity, visibility, wind_speed, wind_direction, pressure
+- Dependent Variable: solar_radiation
 
 ## Methods
 
