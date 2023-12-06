@@ -7,8 +7,12 @@
 
 ## Methods
 
+### Model
+
 - Long Short-Term memory(LSTM)
 - time_steps: 48
+- Loss Function: MSE
+- Optimaizer: ADAM
 
 ### Feature Selection
 
@@ -19,6 +23,12 @@
 
 - 1. Without Scaling
 - 2. MinMaxScaling: range 0 - 1
+
+### Training
+
+- Compared the results by setting batch size and epoch differently
+- validation size: 0.2
+- early stopped: monitor val_loss, patient: 5 epochs more
 
 ## Conclusion
 
