@@ -78,7 +78,7 @@ def main():
 
     predicted1 = post_process(predicted1)
 
-    visualize(predicted1, testy1, "corr",  str(epoch), str(batch_size))
+    visualize(predicted1, testy1, trained_result1, "corr",  str(epoch), str(batch_size))
 
     # 전체 데이터 사용
     trainX2, trainy2, testX2, testy2 = create_sequence(time_steps, features2, "all")
@@ -95,6 +95,6 @@ def main():
 
     predicted2 = post_process(predicted2)
 
-    visualize(predicted2, testy2, "all", str(epoch), str(batch_size))
+    visualize(predicted2, testy2, trained_result2, "all", str(epoch), str(batch_size))
 
 main()
