@@ -35,9 +35,10 @@
 
 ## Conclusion
 
-- Better predicting performance results with all features following evaluation stats(MSE, RMSE)
-    - With all attributes: 0.012, 0.000
-    - With correlated attributes: 0.016, 0.127
+- Much better predicting performance results by scaling data on preprocessing steps.
+- Better predicting performance results with all features and scaling following evaluation stats (MSE, RMSE)
+    - Scaled With all attributes: 0.012, 0.000
+    - Scaled With correlated attributes: 0.016, 0.127
 
 ### Visualized Graphs
 
