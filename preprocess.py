@@ -1,20 +1,21 @@
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 
 def read_data(mode: str):
+    scaler = MinMaxScaler(feature_range=(0, 1))
+
+    data = pd.read_csv("combined.csv")
+    data = data.drop("date.1", axis=1)
+    data = data.drop("date", axis=1)
+
     if mode == "corr":
-        data = pd.read_csv("combined.csv")
-        data = data.drop("date.1", axis=1)
-        data = data.drop("date", axis=1)
-        datax = data[["total_cloud", "rain", "visibility", "humidity"]]
+        datax = scaler.fit_transform(data[["total_cloud", "rain", "visibility", "humidity"]])
     
     if mode == "all":
-        data = pd.read_csv("combined.csv")
-        data = data.drop("date.1", axis=1)
-        data = data.drop("date", axis=1)
-        datax = data[["total_cloud", "rain", "visibility", "humidity", "wind_speed", "wind_direction", "pressure", "temperature"]]
+        datax = scaler.fit_transform(data[["total_cloud", "rain", "visibility", "humidity", "wind_speed", "wind_direction", "pressure", "temperature"]])
 
-    datay = data["solar_radiation"]
+    datay = scaler.fit_transform(data["solar_radiation"].to_numpy().reshape(-1, 1))
 
     print("Date read Finished with Mode: {}".format(mode))
 
@@ -26,10 +27,11 @@ def create_sequence(
         mode: str,
     ):
     print("Start pre-processing. Create Sequence: {}".format(mode))
+
     datax, datay = read_data(mode)
 
-    feature_array = datax.to_numpy()
-    dv_array = datay.to_numpy()
+    feature_array = datax
+    dv_array = datay
 
     num_sequence = len(feature_array) - time_steps
 
@@ -38,7 +40,7 @@ def create_sequence(
 
     for i in range(num_sequence):
         X[i] = feature_array[i: i+time_steps]
-        y[i] = dv_array[i + time_steps]
+        y[i] = dv_array[i + time_steps, 0]
 
     print("Created Sequence - time_step: {}, features: {}".format(time_steps, features))
 
