@@ -1,37 +1,37 @@
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
+# from sklearn.preprocessing import MinMaxScaler
 
-def read_data(mode: str):
-    scaler = MinMaxScaler(feature_range=(0, 1))
-
+def read_data(mode: str, scaler):
     data = pd.read_csv("combined.csv")
     data = data.drop("date.1", axis=1)
-    data = data.drop("date", axis=1)
+    without_index = data.drop("date", axis=1)
+
+    x1 = without_index[["total_cloud", "rain", "visibility", "humidity"]]
+    x2 = without_index[["total_cloud", "rain", "visibility", "humidity", "wind_speed", "wind_direction", "pressure", "temperature"]]
+    y = without_index["solar_radiation"]
 
     if mode == "corr":
-        datax = scaler.fit_transform(data[["total_cloud", "rain", "visibility", "humidity"]])
+        datax = scaler.fit_transform(x1)
     
     if mode == "all":
-        datax = scaler.fit_transform(data[["total_cloud", "rain", "visibility", "humidity", "wind_speed", "wind_direction", "pressure", "temperature"]])
+        datax = scaler.fit_transform(x2)
 
-    datay = scaler.fit_transform(data["solar_radiation"].to_numpy().reshape(-1, 1))
+    datay = scaler.fit_transform(y.to_numpy().reshape(-1, 1))
 
     print("Date read Finished with Mode: {}".format(mode))
 
-    return datax, datay
+    return datax, datay, data
 
 def create_sequence(
         time_steps: int,
         features: int,
         mode: str,
+        scaler,
     ):
     print("Start pre-processing. Create Sequence: {}".format(mode))
 
-    datax, datay = read_data(mode)
-
-    feature_array = datax
-    dv_array = datay
+    feature_array, dv_array, data = read_data(mode, scaler)
 
     num_sequence = len(feature_array) - time_steps
 
@@ -54,4 +54,8 @@ def create_sequence(
 
     print("Split Data with train - test: data size: {}".format(train_size))
 
-    return trainX, trainy, testX, testy
+    date_range_values = data[train_size:len(data)-time_steps]["date"]
+    testy_value_series = data[train_size: num_sequence]["solar_radiation"]
+    testy_value_series.index = date_range_values
+
+    return trainX, trainy, testX, testy, date_range_values, testy_value_series
