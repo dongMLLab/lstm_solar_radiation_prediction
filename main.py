@@ -135,5 +135,5 @@ def main():
     )
 
     eval_frame.to_csv("eval/scaled_evaluation_b{}_e{}_lr{}".format(str(batch_size), str(epoch), str(learning_rate)))
-    print("finished. There are Evaluate Stats: {}".format(eval_frame))
+    print(eval_frame)
 main()
